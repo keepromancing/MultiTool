@@ -70,7 +70,7 @@ function syncCard() {
 function connForm(which, first) {
   const c = conn(which), inv = which === 'inv';
   const repoVal = c.owner && c.repo ? c.owner + '/' + c.repo : '';
-  const REPO = { book: ['Book repo', 'Your username, a slash, and the repo name. Must be private.'], inv: ['Inventory repo', 'Like team-name/inventory. A github.com link works too.'], train: ['Training repo', 'Like team-name/training. Holds the floor plans. Must be private.'] }[which];
+  const REPO = { book: ['Book repo', 'Your username or organization, a slash, and the repo name. Must be private.'], inv: ['Inventory repo', 'Like team-name/inventory. A github.com link works too.'], train: ['Training repo', 'Like team-name/training. Holds the floor plans. Must be private.'] }[which];
   let h = '<div class="form conn" data-which="' + which + '">';
   h += field('cf-repo-' + which, REPO[0], input('cf-repo-' + which, repoVal, 'autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="owner/repo-name"'), REPO[1]);
   h += field('cf-token-' + which, 'Key (fine-grained token)', '<input id="cf-token-' + which + '" type="password" autocomplete="off" spellcheck="false" placeholder="' + (c.token ? 'Saved. Paste a new one to replace it.' : 'github_pat_…') + '">', 'Stays on this phone. It’s left out of backups.');
@@ -90,7 +90,9 @@ function keyHelpTeam() {
 function keyHelp(which) {
   if (which === 'train') return keyHelpTeam();
   const inv = which === 'inv';
-  return '<details class="todo-list"><summary>How to make the key</summary><ol class="help-steps">' +
+  return '<details class="todo-list"><summary>How to make the key</summary>' +
+    (inv ? '' : '<p class="hint">Book repo in an organization you own? Use the key you already have there: open it on the page in step 1, add the book repo under <b>Only select repositories</b>, save, and paste it above. Otherwise:</p>') +
+    '<ol class="help-steps">' +
     '<li>On github.com, open your picture → <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens</b>, and tap <b>Generate new token</b>.</li>' +
     '<li>Name it “The Sheet phone”. Set an expiration you’re comfortable with (a year is fine; you’ll paste a new one when it runs out).</li>' +
     (inv ? '<li><b>Resource owner:</b> pick the organization that owns the inventory repo, not your own account. If it isn’t listed, ask to be added to the organization first.</li>' : '') +
