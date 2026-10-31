@@ -5,10 +5,11 @@ import { S, B, save, tasksOf, blocks, isTicked, card, allCards, catName, roleNam
 import { esc, fmt12, toMin, joinAnd, withBlanks, hasBlank, copyText, dayLabel, fmtRev, $ } from '../util.js';
 import { ICON, chip, seg, empty, openSheet, closeSheet, toast, armed } from '../ui.js';
 import { taskRow, stdRow, countText, howBtn } from './now.js';
+import * as maps from './maps.js';
 
 let q = '', cat = 'all', sheetShift = 'am';
 
-const SUBS = [['lists', 'Checklists'], ['cards', 'Cards'], ['sheet', 'Sheet'], ['day', 'Day']];
+const SUBS = [['lists', 'Checklists'], ['cards', 'Cards'], ['sheet', 'Sheet'], ['day', 'Day'], ['maps', 'Maps']];
 
 function topBar(sub) {
   return '<div class="view-top">' + seg('go-sub', SUBS, sub) +
@@ -120,7 +121,9 @@ export function render(route) {
   if (!hasBook()) return empty('No book loaded yet. <button class="link inline" data-act="tab" data-id="more">Set up</button>');
   const sub = route.sub || 'lists';
   if (sub === 'list') return listView(route.id);
+  if (sub === 'map') return maps.roomView(route.id);
   let h = topBar(sub);
+  if (sub === 'maps') return h + maps.mapsView();
   if (sub === 'cards') h += cardsView();
   else if (sub === 'sheet') h += sheetView();
   else if (sub === 'day') h += dayView();
@@ -138,6 +141,7 @@ function printMenu() {
       '<li><button class="tmpl" data-act="print" data-kind="cards"><span class="tmpl-t">All cards</span><span class="tmpl-b">Two columns, grouped by category.</span></button></li>' +
       '<li><button class="tmpl" data-act="print" data-kind="sheet"><span class="tmpl-t">Blank assignment sheet</span><span class="tmpl-b">AM, PM and all-day jobs with a line for a name.</span></button></li>' +
       '<li><button class="tmpl" data-act="print" data-kind="count"><span class="tmpl-t">Blank count sheet</span><span class="tmpl-b">Every active inventory line with its minimum, for counting on paper.</span></button></li>' +
+      (maps.findV(maps.liveId()) ? '<li><button class="tmpl" data-act="print" data-kind="maps" data-id="' + esc(maps.liveId()) + '"><span class="tmpl-t">Floor plans</span><span class="tmpl-b">Every room in the layout in use, one per page, with the date it went into use.</span></button></li>' : '') +
       '</ul><h3 class="sub-h">One checklist</h3><div class="chips">' + lists.map((l) => '<button class="chip" data-act="print" data-kind="list" data-id="' + esc(l.id) + '">' + esc(l.short || l.name) + '</button>').join('') + '</div>'
   });
 }

@@ -53,7 +53,7 @@ const { appMode } = await import(path.join(dir, 'js/sync.js'));
 T.check(appMode() === mode, 'mode is ' + appMode());
 const tabs = (mk('nav-in').innerHTML.match(/data-id="(\w+)"/g) || []).map((x) => x.slice(9, -1));
 T.check(mode === 'inv' ? tabs.join() === 'count,more' : tabs.length === 5, 'tabs: ' + tabs.join(', '));
-for (const h of ['#now', '#book', '#book/cards', '#book/sheet', '#book/day', '#count', '#count/order', '#count/history', '#count/items', '#lead', '#lead/floor', '#lead/msgs', '#lead/train', '#lead/wins', '#lead/printed', '#more', '#quick']) {
+for (const h of ['#now', '#book', '#book/cards', '#book/sheet', '#book/day', '#count', '#count/order', '#count/history', '#count/items', '#lead', '#lead/floor', '#lead/msgs', '#lead/train', '#lead/wins', '#lead/printed', '#more', '#quick', '#book/maps', '#book/map/v-now/r-main']) {
   location.hash = h;
   await new Promise((r) => setTimeout(r, 10));
   const v = mk('view').innerHTML;

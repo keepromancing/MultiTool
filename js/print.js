@@ -5,6 +5,7 @@ import { app } from './app.js';
 import { S, B, I, L, edit, blocks, tasksOf, card, catName, revOf, roleName } from './state.js';
 import { esc, fmt12, toMin, todayKey, fmtRev, fmtShort, joinAnd, uid, $, fmtNum } from './util.js';
 import { openSheet, closeSheet, toast, field, input, ICON } from './ui.js';
+import * as maps from './views/maps.js';
 
 let stampText = '';
 const stamp = () => '<p class="pv-rev">' + esc(stampText) + '</p>';
@@ -26,6 +27,7 @@ export function target(t) {
     case 'cards': { const cards = staffCards(false); return { label: 'All cards', rev: revOf(cards) }; }
     case 'sheet': return { label: 'Assignment sheet (blank)', rev: revOf(b.assignments) };
     case 'count': return { label: 'Count sheet (blank)', rev: I().updated || todayKey() };
+    case 'maps': return maps.printTarget(t.id);
     default: return null;
   }
 }
@@ -90,6 +92,7 @@ function build(t, info) {
     case 'cards': return cardsHTML(false);
     case 'sheet': return sheetHTML();
     case 'count': return countHTML();
+    case 'maps': return maps.printHTML(t.id, stamp);
     default: return '';
   }
 }

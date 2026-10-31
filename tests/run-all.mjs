@@ -28,6 +28,7 @@ step('Order amounts, shared text', node, [path.join(HERE, 'count.test.mjs')]);
 step('Saves when the app goes to the background', node, [path.join(HERE, 'background.test.mjs')]);
 step('Backups leave out daily and personal data', node, [path.join(HERE, 'backup.test.mjs')]);
 step('Offline files; nothing loaded from outside', node, [path.join(HERE, 'offline.test.mjs')]);
+step('Floor plans', node, [path.join(HERE, 'maps.test.mjs')]);
 step('Every screen draws', node, [path.join(HERE, 'shell.test.mjs')]);
 step('Tap-twice confirm', node, [path.join(HERE, 'confirm.test.mjs')]);
 const r = step('Draw screens for the markup check', node, [path.join(HERE, 'a11y', 'render.mjs')], { capture: true });

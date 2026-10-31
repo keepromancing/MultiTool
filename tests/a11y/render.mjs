@@ -36,10 +36,14 @@ const { S, B } = await import(path.join(dir, 'js/state.js'));
 const shell = () => mk('top-in').innerHTML + '\n' + mk('nav-in').innerHTML;
 const save = (name, html) => fs.writeFileSync(path.join(out, name + '.html'), '<!doctype html><html lang="en"><body>' + html + '</body></html>');
 save('_shell', shell());
-const routes = ['#now', '#book', '#book/cards', '#book/sheet', '#book/day', '#count', '#count/order', '#count/history', '#count/items', '#lead', '#lead/floor', '#lead/msgs', '#lead/train', '#lead/wins', '#lead/printed', '#more', '#quick'];
-for (const h of routes) { location.hash = h; await new Promise((r) => setTimeout(r, 10)); save(h.slice(1).replace('/', '-'), mk('view').innerHTML); }
+const routes = ['#now', '#book', '#book/cards', '#book/sheet', '#book/day', '#count', '#count/order', '#count/history', '#count/items', '#lead', '#lead/floor', '#lead/msgs', '#lead/train', '#lead/wins', '#lead/printed', '#more', '#quick', '#book/maps', '#book/map/v-now/r-main', '#book/map/v-next/r-patio'];
+for (const h of routes) { location.hash = h; await new Promise((r) => setTimeout(r, 10)); save(h.slice(1).replace(/\//g, '-'), mk('view').innerHTML); }
 // Edit mode in the book
 location.hash = '#book'; app.ui.editing = true; app.renderView(); save('book-edit', mk('view').innerHTML); app.ui.editing = false;
+// Floor plans in edit mode: the version list, a room with a table picked, and the walls with a corner picked.
+location.hash = '#book/maps'; app.ui.editing = true; app.renderView(); save('maps-edit', mk('view').innerHTML);
+location.hash = '#book/map/v-now/r-main'; app.ui.editing = true; app.acts['map-sel']({ dataset: { id: 't-7' } }); save('map-edit-table', mk('view').innerHTML);
+app.acts['map-walls']({ dataset: {} }); app.acts['map-corner']({ dataset: { id: '2' } }); save('map-edit-walls', mk('view').innerHTML); app.acts['map-walls']({ dataset: {} }); app.ui.editing = false;
 // Open an item editor on the Items tab
 const firstLine = S.inv.local && S.inv.local.lines[0];
 location.hash = '#count/items'; if (firstLine) { try { app.acts['item-open']({ dataset: { id: firstLine.id } }); } catch (e) {} app.renderView(); save('count-items-open', mk('view').innerHTML); }

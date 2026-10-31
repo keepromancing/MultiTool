@@ -1,0 +1,531 @@
+{
+ "schema": 1,
+ "updated": "2026-01-14",
+ "live": "v-now",
+ "versions": [
+  {
+   "id": "v-now",
+   "name": "Current layout",
+   "note": "",
+   "made": "2026-01-02",
+   "by": "AA",
+   "wentLive": "2026-01-02",
+   "updated": "2026-01-14",
+   "rooms": [
+    {
+     "id": "r-main",
+     "name": "Main room",
+     "w": 30,
+     "h": 20,
+     "walls": [
+      [
+       0,
+       0
+      ],
+      [
+       30,
+       0
+      ],
+      [
+       30,
+       20
+      ],
+      [
+       12,
+       20
+      ],
+      [
+       12,
+       16
+      ],
+      [
+       0,
+       16
+      ]
+     ],
+     "closed": false,
+     "closedNote": "",
+     "updated": "2026-01-14",
+     "items": [
+      {
+       "id": "t-1",
+       "kind": "table",
+       "shape": "rect",
+       "label": "1",
+       "x": 2,
+       "y": 2,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-2",
+       "kind": "table",
+       "shape": "rect",
+       "label": "2",
+       "x": 8,
+       "y": 2,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-3",
+       "kind": "table",
+       "shape": "rect",
+       "label": "3",
+       "x": 14,
+       "y": 2,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-4",
+       "kind": "table",
+       "shape": "rect",
+       "label": "4",
+       "x": 2,
+       "y": 8,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-5",
+       "kind": "table",
+       "shape": "rect",
+       "label": "5",
+       "x": 8,
+       "y": 8,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-6",
+       "kind": "table",
+       "shape": "rect",
+       "label": "6",
+       "x": 14,
+       "y": 8,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-7",
+       "kind": "table",
+       "shape": "round",
+       "label": "7",
+       "x": 21,
+       "y": 3,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "m-bar",
+       "kind": "counter",
+       "shape": "rect",
+       "label": "Service bar",
+       "x": 18,
+       "y": 12,
+       "w": 10,
+       "h": 2
+      },
+      {
+       "id": "m-door",
+       "kind": "label",
+       "shape": "rect",
+       "label": "Entrance",
+       "x": 1,
+       "y": 13,
+       "w": 7,
+       "h": 2
+      }
+     ]
+    },
+    {
+     "id": "r-patio",
+     "name": "Patio",
+     "w": 20,
+     "h": 14,
+     "walls": [
+      [
+       0,
+       0
+      ],
+      [
+       20,
+       0
+      ],
+      [
+       20,
+       14
+      ],
+      [
+       0,
+       14
+      ]
+     ],
+     "closed": false,
+     "closedNote": "",
+     "updated": "2026-01-10",
+     "items": [
+      {
+       "id": "t-p1",
+       "kind": "table",
+       "shape": "round",
+       "label": "P1",
+       "x": 2,
+       "y": 2,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "t-p2",
+       "kind": "table",
+       "shape": "round",
+       "label": "P2",
+       "x": 8,
+       "y": 2,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "t-p3",
+       "kind": "table",
+       "shape": "round",
+       "label": "P3",
+       "x": 14,
+       "y": 2,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "t-s1",
+       "kind": "seat",
+       "shape": "round",
+       "label": "S1",
+       "x": 3,
+       "y": 10,
+       "w": 2,
+       "h": 2
+      },
+      {
+       "id": "t-s2",
+       "kind": "seat",
+       "shape": "round",
+       "label": "S2",
+       "x": 6,
+       "y": 10,
+       "w": 2,
+       "h": 2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v-next",
+   "name": "After the remodel",
+   "note": "A made-up draft for tests.",
+   "made": "2026-01-10",
+   "by": "AA",
+   "updated": "2026-01-12",
+   "rooms": [
+    {
+     "id": "r-main",
+     "name": "Main room",
+     "w": 30,
+     "h": 20,
+     "walls": [
+      [
+       0,
+       0
+      ],
+      [
+       30,
+       0
+      ],
+      [
+       30,
+       20
+      ],
+      [
+       12,
+       20
+      ],
+      [
+       12,
+       16
+      ],
+      [
+       0,
+       16
+      ]
+     ],
+     "closed": false,
+     "closedNote": "",
+     "updated": "2026-01-12",
+     "items": [
+      {
+       "id": "t-1",
+       "kind": "table",
+       "shape": "rect",
+       "label": "1",
+       "x": 2,
+       "y": 2,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-2",
+       "kind": "table",
+       "shape": "rect",
+       "label": "2",
+       "x": 8,
+       "y": 2,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-3",
+       "kind": "table",
+       "shape": "rect",
+       "label": "3",
+       "x": 14,
+       "y": 2,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-4",
+       "kind": "table",
+       "shape": "rect",
+       "label": "4",
+       "x": 2,
+       "y": 10,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-5",
+       "kind": "table",
+       "shape": "rect",
+       "label": "5",
+       "x": 8,
+       "y": 10,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "t-6",
+       "kind": "table",
+       "shape": "rect",
+       "label": "6",
+       "x": 14,
+       "y": 10,
+       "w": 4,
+       "h": 3
+      },
+      {
+       "id": "m-bar",
+       "kind": "counter",
+       "shape": "rect",
+       "label": "Service bar",
+       "x": 18,
+       "y": 12,
+       "w": 10,
+       "h": 2
+      },
+      {
+       "id": "m-door",
+       "kind": "label",
+       "shape": "rect",
+       "label": "Entrance",
+       "x": 1,
+       "y": 13,
+       "w": 7,
+       "h": 2
+      },
+      {
+       "id": "t-8",
+       "kind": "table",
+       "shape": "rect",
+       "label": "8",
+       "x": 21,
+       "y": 3,
+       "w": 4,
+       "h": 3
+      }
+     ]
+    },
+    {
+     "id": "r-patio",
+     "name": "Patio",
+     "w": 20,
+     "h": 14,
+     "walls": [
+      [
+       0,
+       0
+      ],
+      [
+       20,
+       0
+      ],
+      [
+       20,
+       14
+      ],
+      [
+       0,
+       14
+      ]
+     ],
+     "closed": true,
+     "closedNote": "Closed for resurfacing (sample)",
+     "updated": "2026-01-12",
+     "items": [
+      {
+       "id": "t-p1",
+       "kind": "table",
+       "shape": "round",
+       "label": "P1",
+       "x": 2,
+       "y": 2,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "t-p2",
+       "kind": "table",
+       "shape": "round",
+       "label": "P2",
+       "x": 8,
+       "y": 2,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "t-p3",
+       "kind": "table",
+       "shape": "round",
+       "label": "P3",
+       "x": 14,
+       "y": 2,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "t-s1",
+       "kind": "seat",
+       "shape": "round",
+       "label": "S1",
+       "x": 3,
+       "y": 10,
+       "w": 2,
+       "h": 2
+      },
+      {
+       "id": "t-s2",
+       "kind": "seat",
+       "shape": "round",
+       "label": "S2",
+       "x": 6,
+       "y": 10,
+       "w": 2,
+       "h": 2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v-old",
+   "name": "Summer layout",
+   "note": "",
+   "made": "2025-06-01",
+   "by": "BB",
+   "wentLive": "2025-06-01",
+   "retired": "2026-01-02",
+   "updated": "2025-06-01",
+   "rooms": [
+    {
+     "id": "r-patio",
+     "name": "Patio",
+     "w": 20,
+     "h": 14,
+     "walls": [
+      [
+       0,
+       0
+      ],
+      [
+       20,
+       0
+      ],
+      [
+       20,
+       14
+      ],
+      [
+       0,
+       14
+      ]
+     ],
+     "closed": false,
+     "closedNote": "",
+     "updated": "2026-01-10",
+     "items": [
+      {
+       "id": "t-p1",
+       "kind": "table",
+       "shape": "round",
+       "label": "P1",
+       "x": 2,
+       "y": 2,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "t-p2",
+       "kind": "table",
+       "shape": "round",
+       "label": "P2",
+       "x": 8,
+       "y": 2,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "t-p3",
+       "kind": "table",
+       "shape": "round",
+       "label": "P3",
+       "x": 14,
+       "y": 2,
+       "w": 4,
+       "h": 4
+      },
+      {
+       "id": "t-s1",
+       "kind": "seat",
+       "shape": "round",
+       "label": "S1",
+       "x": 3,
+       "y": 10,
+       "w": 2,
+       "h": 2
+      },
+      {
+       "id": "t-s2",
+       "kind": "seat",
+       "shape": "round",
+       "label": "S2",
+       "x": 6,
+       "y": 10,
+       "w": 2,
+       "h": 2
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

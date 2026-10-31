@@ -1,14 +1,14 @@
 // Offline support. The app shell is cached on install; everything then runs with no connection.
 // GitHub API calls always go to the network and are never cached. Nothing else is fetched from outside the app.
 
-const VERSION = 'mt-1.4.4';
+const VERSION = 'mt-1.5.0';
 const SHELL_CACHE = 'mt-shell-' + VERSION;
 const SHELL = [
   './', './index.html', './app.css', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png',
   './js/main.js', './js/app.js', './js/util.js', './js/db.js', './js/merge.js', './js/state.js', './js/sync.js', './js/ui.js',
   './js/print.js', './js/cardsheet.js', './js/shift.js', './js/msgs.js',
-  './js/views/now.js', './js/views/book.js', './js/views/count.js', './js/views/lead.js', './js/views/more.js', './js/views/quick.js',
+  './js/views/now.js', './js/views/book.js', './js/views/count.js', './js/views/lead.js', './js/views/more.js', './js/views/quick.js', './js/views/maps.js',
   './fonts/atkinson-hyperlegible-400.woff2', './fonts/atkinson-hyperlegible-700.woff2', './fonts/atkinson-hyperlegible-400-italic.woff2',
   './fonts/ibm-plex-mono-400.woff2', './fonts/ibm-plex-mono-500.woff2', './fonts/ibm-plex-mono-600.woff2',
   './fonts/sofia-sans-extra-condensed-700.woff2', './fonts/sofia-sans-extra-condensed-800.woff2'

@@ -40,9 +40,10 @@ export function fullPhone({ clash = true } = {}) {
     state: slot(state, 'owner/book'),
     inv: slot(fixture('inventory.json'), 'team/inventory'),
     counts: slot(history(), 'team/inventory'),
+    plans: slot(fixture('floorplans.json'), 'team/training'),
     count: { id: 'c1', started: iso(0, 9), counts: { 'p-cups': 2, 'p-lids': 0, 'p-napkins': 0.5 }, orders: {} },
     conflicts: clash ? [{ id: 'cf1', key: 'inv', file: 'inventory.json', at: iso(0, 10), review: true, who: 'BB', path: '.lines[ln-lids].par', kept: 'phone', ours: 3, theirs: 5 }] : [],
-    settings: { owner: 'owner', repo: 'book', branch: 'main', token: 'tok', invOwner: 'team', invRepo: 'inventory', invBranch: 'main', invToken: 'tok2', invShared: true, name: 'Alex', initials: 'AA', role: 'floor', theme: 'auto', quick: true, setupDone: true, created: '2026-01-01T00:00:00Z', lastSync: iso(0, 11), perm: { book: { push: true }, inv: { push: true } } }
+    settings: { owner: 'owner', repo: 'book', branch: 'main', token: 'tok', invOwner: 'team', invRepo: 'inventory', invBranch: 'main', invToken: 'tok2', invShared: true, trainOwner: 'team', trainRepo: 'training', trainBranch: 'main', trainToken: 'tok3', name: 'Alex', initials: 'AA', role: 'floor', theme: 'auto', quick: true, setupDone: true, created: '2026-01-01T00:00:00Z', lastSync: iso(0, 11), perm: { book: { push: true }, inv: { push: true }, train: { push: true } } }
   };
 }
 

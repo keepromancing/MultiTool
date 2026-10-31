@@ -7,6 +7,8 @@
 //   Inventory connection (a shared repo; falls back to the book repo if none is set):
 //     inv    -> inventory.json  inventory lines and products
 //     counts -> counts.json     saved counts and their order status
+//   Training connection (a team repo; no fallback, maps stay on the phone until it's connected):
+//     plans  -> floorplans.json floor plans, as whole-floor versions
 // Phone only, never synced:
 //   count (count in progress), day (today's ticks), shift (shift notes), floor (who's on, breaks),
 //   trainees, priv (staffing plan and private cards), msgs (message drafts), settings (incl. GitHub key)
@@ -14,19 +16,21 @@
 import * as db from './db.js';
 import { clone, same, todayKey, toMin, nowMin, uid } from './util.js';
 
-export const SYNCED = ['book', 'state', 'inv', 'counts'];
-const KEYS = ['book', 'inv', 'state', 'counts', 'count', 'day', 'shift', 'floor', 'trainees', 'priv', 'msgs', 'settings', 'conflicts'];
+export const SYNCED = ['book', 'state', 'inv', 'counts', 'plans'];
+const KEYS = ['book', 'inv', 'state', 'counts', 'plans', 'count', 'day', 'shift', 'floor', 'trainees', 'priv', 'msgs', 'settings', 'conflicts'];
 
 const EMPTY_BOOK = { schema: 3, title: 'Floor Book', subtitle: '', updated: null, outlets: [], people: [], messaging: '', posName: '', day: { end: '21:00', pmStart: '13:00', blocks: [] }, roles: [], lists: [], cats: [], cards: [], tasks: [], assignments: [], training: [], links: [] };
 const EMPTY_INV = { schema: 1, title: 'Inventory', updated: null, messaging: '', cats: [], lines: [], seen: null };
 const EMPTY_STATE = { schema: 1, updated: null, follow: [], wins: [], printed: [] };
 const EMPTY_COUNTS = { schema: 1, updated: null, history: [] };
+const EMPTY_PLANS = { schema: 1, updated: null, live: null, versions: [] };
 
 const defaults = () => ({
   book: { base: null, local: null, sha: null, syncedAt: null },
   inv: { base: null, local: null, sha: null, syncedAt: null },
   state: { base: null, local: null, sha: null, syncedAt: null },
   counts: { base: null, local: null, sha: null, syncedAt: null },
+  plans: { base: null, local: null, sha: null, syncedAt: null },
   count: newCount(),
   day: { date: todayKey(), ticks: [], mine: [] },
   shift: { key: null, notes: [], f: {}, sentAt: null },
@@ -34,7 +38,7 @@ const defaults = () => ({
   trainees: [],
   priv: { staffPlan: null, cards: [] },
   msgs: {},
-  settings: { owner: '', repo: '', branch: 'main', token: '', invOwner: '', invRepo: '', invBranch: 'main', invToken: '', name: '', initials: '', lastSyncError: '', invShared: false, perm: {}, role: 'floor', theme: 'auto', quick: true, lastExport: null, lastSync: null, setupDone: false, created: new Date().toISOString() },
+  settings: { owner: '', repo: '', branch: 'main', token: '', invOwner: '', invRepo: '', invBranch: 'main', invToken: '', trainOwner: '', trainRepo: '', trainBranch: 'main', trainToken: '', name: '', initials: '', lastSyncError: '', invShared: false, perm: {}, role: 'floor', theme: 'auto', quick: true, lastExport: null, lastSync: null, setupDone: false, created: new Date().toISOString() },
   conflicts: []
 });
 
@@ -106,9 +110,10 @@ export const B = () => S.book.local || EMPTY_BOOK;
 export const I = () => S.inv.local || EMPTY_INV;
 export const L = () => S.state.local || EMPTY_STATE;
 export const C = () => S.counts.local || EMPTY_COUNTS;
+export const P = () => S.plans.local || EMPTY_PLANS;
 export const hasBook = () => !!S.book.local;
 export const hasInv = () => !!S.inv.local;
-const EMPTY = { book: EMPTY_BOOK, inv: EMPTY_INV, state: EMPTY_STATE, counts: EMPTY_COUNTS };
+const EMPTY = { book: EMPTY_BOOK, inv: EMPTY_INV, state: EMPTY_STATE, counts: EMPTY_COUNTS, plans: EMPTY_PLANS };
 
 export function edit(key, fn) {
   if (!S[key].local) S[key].local = clone(EMPTY[key]);

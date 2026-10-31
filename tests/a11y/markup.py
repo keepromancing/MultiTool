@@ -49,7 +49,8 @@ for f in sorted(glob.glob(os.path.join(d, '*.html'))):
     for el in doc.xpath('//img'):
         if el.get('alt') is None: issues['img without alt'].append(name)
     for el in doc.xpath('//svg'):
-        if el.get('aria-hidden') != 'true' and not el.xpath('ancestor::*[@aria-hidden="true"]'):
+        meaningful = el.get('role') == 'img' and (el.get('aria-label') or '').strip()  # a picture with a text alternative, like a floor plan
+        if el.get('aria-hidden') != 'true' and not meaningful and not el.xpath('ancestor::*[@aria-hidden="true"]'):
             issues['svg not hidden (decorative icons should be aria-hidden)'].append(name); break
     # visible label text should be inside the accessible name (2.5.3)
     for el in doc.xpath('//button[@aria-label]'):

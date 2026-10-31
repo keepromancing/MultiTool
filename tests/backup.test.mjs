@@ -35,8 +35,8 @@ T.check(!!text && !/MARKER-STAFFPLAN|MARKER-PRIVCARD/.test(text), 'no staffing p
 T.check(!!text && !/MARKER-RESIDENT|Out of oat milk/.test(text), 'no shift note text anywhere, resident notes included');
 T.check(!!text && !/MARKER-DRAFT/.test(text), 'no message draft text');
 T.check(!!text && !/\bRiley\b|\bSam\b/.test(text), 'no floor board or remembered staff names');
-T.check(b.data.settings && !('token' in b.data.settings) && !('invToken' in b.data.settings) && !('floorNames' in b.data.settings), 'settings without keys or staff names');
-for (const k of ['book', 'inv', 'state', 'counts', 'count', 'trainees']) T.check(k in b.data, 'keeps ' + k);
+T.check(b.data.settings && !('token' in b.data.settings) && !('invToken' in b.data.settings) && !('trainToken' in b.data.settings) && !('floorNames' in b.data.settings), 'settings without keys (book, inventory, training) or staff names');
+for (const k of ['book', 'inv', 'state', 'counts', 'plans', 'count', 'trainees']) T.check(k in b.data, 'keeps ' + k);
 
 console.log('\n2. Restoring an older backup that still has the left-out parts');
 T.check(typeof more.restoreBackupData === 'function', 'restore is reachable');

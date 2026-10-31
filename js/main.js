@@ -15,13 +15,14 @@ import * as cards from './cardsheet.js';
 import * as shift from './shift.js';
 import * as msgs from './msgs.js';
 import * as print from './print.js';
+import * as maps from './views/maps.js';
 
-app.version = '1.4.4';
+app.version = '1.5.0';
 const VIEWS = { now, book, count, lead, more, quick };
 const TABS = [['now', 'Now', ICON.now], ['book', 'Book', ICON.book], ['count', 'Count', ICON.count], ['lead', 'Lead', ICON.lead], ['more', 'More', ICON.more]];
 const INV_TABS = ['count', 'more'];
 const tabsNow = () => (appMode() === 'inv' ? TABS.filter((t) => INV_TABS.includes(t[0])) : TABS);
-[now, book, count, lead, more, quick, cards, shift, msgs, print].forEach((m) => app.register(m));
+[now, book, count, lead, more, quick, cards, shift, msgs, print, maps].forEach((m) => app.register(m));
 
 let booted = false;
 /* ---------- routing ---------- */
@@ -63,7 +64,7 @@ function renderNav() {
   n.innerHTML = tabsNow().map(([id, label, icon]) => '<button class="nav-b' + (cur === id ? ' on' : '') + '" data-act="tab" data-id="' + id + '" aria-current="' + (cur === id ? 'page' : 'false') + '">' + icon + '<span>' + label + '</span>' + (id === 'lead' && leadDot() ? '<i class="nav-dot"></i>' : '') + '</button>').join('');
 }
 /* Each screen gets a heading for screen readers and its own page title (WCAG 2.4.2, 1.3.1). */
-const SUB_NAMES = { count: { order: 'Order', history: 'History', items: 'Items' }, book: { cards: 'Cards', sheet: 'Assignment sheet', day: 'The day', list: 'Checklist' }, lead: { floor: 'Floor', msgs: 'Messages', train: 'Training', wins: 'Wins', printed: 'Printed copies' } };
+const SUB_NAMES = { count: { order: 'Order', history: 'History', items: 'Items' }, book: { cards: 'Cards', sheet: 'Assignment sheet', day: 'The day', list: 'Checklist', maps: 'Floor plans', map: 'Floor plan' }, lead: { floor: 'Floor', msgs: 'Messages', train: 'Training', wins: 'Wins', printed: 'Printed copies' } };
 function screenName() {
   const r = app.route, tab = (TABS.find((t) => t[0] === r.tab) || [])[1] || (r.tab === 'quick' ? 'Quick view' : 'The Sheet');
   const sub = SUB_NAMES[r.tab] && SUB_NAMES[r.tab][r.sub];

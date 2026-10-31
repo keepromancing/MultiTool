@@ -34,6 +34,8 @@ PAIRS = [
  ('bg','marker',4.5,'To order count'), ('bg','stop',4.5,'armed button'), ('#1C1205','hero-lamp',4.5,'Now button'),
  ('lamp','bg',4.5,'lamp labels on page'), ('go','bg',4.5,'go text on page'), ('ink','none-soft',4.5,'count chips'), ('bg','ink',4.5,'primary buttons'),
  ('muted','none-soft',4.5,'muted on tags'), ('plenty','surface',4.5,'plenty text'),
+ ('ink','plenty-soft',4.5,'table numbers on maps'), ('band-text','surface',3,'table outlines on maps'), ('band-text','plenty-soft',3,'table outlines against their fill'), ('none','surface',3,'counter outlines on maps'),
+ ('focus','plenty-soft',3,'selected table on maps'), ('ink','sunk',3,'walls against the map edge'), ('stop','surface',3,'closed-for-work hatching'),
 ]
 fails = 0
 for name, T in (('light', light), ('dark', dark)):

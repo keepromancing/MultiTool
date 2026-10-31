@@ -2,6 +2,7 @@
 // Each "part" of the app lives in its own repo, and access is managed on GitHub, not in the app:
 //   book: book.json and state.json (one person's book, follow-ups and logs)
 //   inv:  inventory.json and counts.json (shared between the people who count and order)
+//   train: floorplans.json (training material for the team; later the new-hire cards)
 // Every sync asks GitHub what this key can do with each repo. Write access: normal. Read-only:
 // the part still loads but nothing is pushed, and the screens go view-only. No access: that part
 // stops syncing and says so. So adding or removing someone is a change on GitHub only.
@@ -13,18 +14,25 @@ import { mergeDoc, getAtPath, dropGone } from './merge.js';
 import { clone, same } from './util.js';
 
 const API = 'https://api.github.com';
-export const FILES = { book: 'book.json', state: 'state.json', inv: 'inventory.json', counts: 'counts.json' };
+export const FILES = { book: 'book.json', state: 'state.json', inv: 'inventory.json', counts: 'counts.json', plans: 'floorplans.json' };
 const INV_KEYS = ['inv', 'counts'];
+const TRAIN_KEYS = ['plans'];
+export const CONNS = ['book', 'inv', 'train'];
 
 /* ---------- connections ---------- */
 export function conn(which) {
   const s = S.settings;
   if (which === 'inv') return { owner: s.invOwner, repo: s.invRepo, token: s.invToken, branch: s.invBranch || 'main' };
+  if (which === 'train') return { owner: s.trainOwner, repo: s.trainRepo, token: s.trainToken, branch: s.trainBranch || 'main' };
   return { owner: s.owner, repo: s.repo, token: s.token, branch: s.branch || 'main' };
 }
+/* The settings that hold each connection. */
+export const SETTING = { book: { owner: 'owner', repo: 'repo', token: 'token', branch: 'branch' }, inv: { owner: 'invOwner', repo: 'invRepo', token: 'invToken', branch: 'invBranch' }, train: { owner: 'trainOwner', repo: 'trainRepo', token: 'trainToken', branch: 'trainBranch' } };
 const ok = (c) => !!(c && c.owner && c.repo && c.token);
 export const bookConfigured = () => ok(conn('book'));
 export const invConfigured = () => ok(conn('inv'));
+export const trainConfigured = () => ok(conn('train'));
+export const connConfigured = (which) => ok(conn(which));
 export const configured = () => bookConfigured() || invConfigured();
 /* full: the whole app (a book is loaded or connected). inv: count and order only. none: not set up. */
 export function appMode() {
@@ -48,6 +56,7 @@ export const repoLabel = (c) => c.owner + '/' + c.repo;
    Once a shared inventory repo has been connected, inventory never falls back to the book repo,
    even if the shared connection is removed: the book repo's copy would be stale. */
 export function connOf(key) {
+  if (TRAIN_KEYS.includes(key)) return trainConfigured() ? 'train' : null;
   if (INV_KEYS.includes(key)) {
     if (invConfigured()) return 'inv';
     return !S.settings.invShared && bookConfigured() ? 'book' : null;
@@ -266,7 +275,7 @@ export function syncAll() {
       if (invConfigured()) S.settings.invShared = true;
       // Check each connection once: reachable? writable? Then sync its files.
       const metas = {};
-      for (const w of ['book', 'inv']) {
+      for (const w of CONNS) {
         if (!Object.keys(FILES).some((k) => connOf(k) === w)) continue;
         try {
           const m = await repoMeta(conn(w));
